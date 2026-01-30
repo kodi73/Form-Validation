@@ -21,9 +21,10 @@ form.addEventListener("submit", (event) => {
     const isCountryValid = validateCountry();
     const isZipValid = validateZip();
     const isPasswordValid = validatePassword();
+    const isConfirmPasswordValid = validateConfirmPassword();
 
-    if (isEmailValid && isCountryValid && isZipValid && isPasswordValid) {
-        console.log("Email, country, zip and password fields are valid. Proceed.");
+    if (isEmailValid && isCountryValid && isZipValid && isPasswordValid && isConfirmPasswordValid) {
+        console.log("All fields are valid. Proceed.");
     }
     console.log("Form submit intercepted.");
 });
@@ -121,6 +122,24 @@ function validatePassword() {
     return true;
 }
 
+function validateConfirmPassword() {
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    if (confirmPassword.length === 0) {
+        showError(confirmPasswordInput, "Please confirm your password.");
+        return false;
+    }
+
+    if (password !== confirmPassword) {
+        showError(confirmPasswordInput, "Passwords do not match.");
+        return false;
+    }
+
+    showSuccess(confirmPasswordInput);
+    return true;
+}
+
 emailInput.addEventListener("input", validateEmail);
 emailInput.addEventListener("blur", validateEmail);
 
@@ -132,5 +151,8 @@ zipInput.addEventListener("blur", validateZip);
 
 passwordInput.addEventListener("input", validatePassword);
 passwordInput.addEventListener("blur", validatePassword);
+
+confirmPasswordInput.addEventListener("input", validateConfirmPassword);
+confirmPasswordInput.addEventListener("blur", validateConfirmPassword);
 
 console.log("Form Validation project loaded successfully.");
