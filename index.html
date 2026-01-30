@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="zip">Zip/Postal Code</label>
-                <input type="text" id="zip" name="zip" required />
+                <input type="text" id="zip" name="zip" required pattern="[A-Za-z0-9\s\-]{4,10}"/>
                 <span class="error" aria-live="polite"></span>
             </div>
 

@@ -19,9 +19,10 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
     const isEmailValid = validateEmail();
     const isCountryValid = validateCountry();
+    const isZipValid = validateZip();
 
-    if (isEmailValid && isCountryValid) {
-        console.log("Email and country field are valid. Proceed.");
+    if (isEmailValid && isCountryValid && isZipValid) {
+        console.log("Email, country and zip fields are valid. Proceed.");
     }
     console.log("Form submit intercepted.");
 });
@@ -77,10 +78,28 @@ function validateCountry() {
     return true;
 }
 
+function validateZip() {
+    if (zipInput.validity.valuemissing) {
+        showError(zipInput, "Postal Code is required.");
+        return false;
+    }
+
+    if (zipInput.validity.patternMismatch) {
+        showError(zipInput, "Postal code must be 4 - 10 letters and may contain letters, numbers, spaces, or hyphens.");
+        return false;
+    }
+
+    showSuccess(zipInput);
+    return true;
+}
+
 emailInput.addEventListener("input", validateEmail);
 emailInput.addEventListener("blur", validateEmail);
 
 countryInput.addEventListener("input", validateCountry);
 countryInput.addEventListener("blur", validateCountry);
+
+zipInput.addEventListener("input", validateZip);
+zipInput.addEventListener("blur", validateZip);
 
 console.log("Form Validation project loaded successfully.");
