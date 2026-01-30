@@ -20,9 +20,10 @@ form.addEventListener("submit", (event) => {
     const isEmailValid = validateEmail();
     const isCountryValid = validateCountry();
     const isZipValid = validateZip();
+    const isPasswordValid = validatePassword();
 
-    if (isEmailValid && isCountryValid && isZipValid) {
-        console.log("Email, country and zip fields are valid. Proceed.");
+    if (isEmailValid && isCountryValid && isZipValid && isPasswordValid) {
+        console.log("Email, country, zip and password fields are valid. Proceed.");
     }
     console.log("Form submit intercepted.");
 });
@@ -93,6 +94,33 @@ function validateZip() {
     return true;
 }
 
+function validatePassword() {
+    const value = passwordInput.value;
+    
+    if (value.length == 0) {
+        showError(passwordInput, "Password is required.");
+        return false;
+    }
+
+    if (value.length < 8) {
+        showError(passwordInput, "Password must be of atleast 8 characters.");
+        return false;
+    }
+
+    if (!/[A-Za-z]/.test(value)) {
+        showError(passwordInput, "Password must contain atleast one letter.");
+        return false;
+    }
+
+    if (!/[0-9]/.test(value)) {
+        showError(passwordInput, "Password must contain a digit.");
+        return false;
+    }
+
+    showSuccess(passwordInput);
+    return true;
+}
+
 emailInput.addEventListener("input", validateEmail);
 emailInput.addEventListener("blur", validateEmail);
 
@@ -101,5 +129,8 @@ countryInput.addEventListener("blur", validateCountry);
 
 zipInput.addEventListener("input", validateZip);
 zipInput.addEventListener("blur", validateZip);
+
+passwordInput.addEventListener("input", validatePassword);
+passwordInput.addEventListener("blur", validatePassword);
 
 console.log("Form Validation project loaded successfully.");
