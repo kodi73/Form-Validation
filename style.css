@@ -74,3 +74,12 @@ button {
 button:hover {
     background-color: #3e68e0;
 }
+
+input.invalid {
+    border-color: #c62828;
+}
+
+input:valid {
+    border-color: #2e7d32;
+}
+
