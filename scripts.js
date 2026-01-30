@@ -1,4 +1,5 @@
 const form = document.querySelector("#registration-form");
+const successMessage = document.querySelector("#success-message")
 
 const emailInput = document.querySelector("#email");
 const countryInput = document.querySelector("#country");
@@ -25,6 +26,8 @@ form.addEventListener("submit", (event) => {
 
     if (isEmailValid && isCountryValid && isZipValid && isPasswordValid && isConfirmPasswordValid) {
         console.log("All fields are valid. Proceed.");
+        form.hidden = true;
+        successMessage.hidden = false;
     }
     console.log("Form submit intercepted.");
 });

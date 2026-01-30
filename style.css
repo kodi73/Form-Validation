@@ -83,3 +83,16 @@ input:valid {
     border-color: #2e7d32;
 }
 
+#success-message {
+    text-align: center;
+}
+
+#success-message h2 {
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+}
+
+#success-message p {
+    color: #333;
+    font-size: 0.95rem;
+}
